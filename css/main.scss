@@ -1,0 +1,247 @@
+$color-muddywhite:rgba(255, 255, 255, 0.7);
+* {
+    box-sizing: border-box;
+} 
+
+html {
+    line-height: 1.15; 
+    -webkit-text-size-adjust: 100%;
+    background: conic-gradient(from 135deg, #1B1E2A 0% 25%, #1B212D 0% 50%, #1B1E2A 19% 75%, #1B212D 0) 50%/ 150px 150px;
+    font-size: 2rem;
+    height: 100%;
+
+    @media screen and (max-width: 130rem) {
+        font-size: 1.6rem;
+    }
+
+    @media screen and (max-width: 85rem) {
+        font-size: 1.3rem;
+    }
+
+    @media screen and (max-width: 70rem) {
+        font-size: 1.1rem;
+    }
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    padding: 3rem;
+
+    @media screen and (max-width: 70rem) {
+        padding: 1rem;
+    }
+}
+
+.main {
+    height: 100%;
+    position: relative;
+} 
+
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.scrollbar--black::-webkit-scrollbar {
+    width: 0.4rem;
+    background-color: #1B1E2A;
+}
+
+.scrollbar--black::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}
+
+.scrollbar--black::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgb(128, 128, 128); 
+}
+
+.text--muddywhite {
+    color: $color-muddywhite;
+}
+
+.clearfix {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.appointments-container {
+    width: 50%;
+    overflow: auto;
+
+    @media screen and (max-width: 70rem) {
+        width: 60%;
+    }
+}
+
+.appointment {
+    background-color: rgba(0, 0, 0, 0.28);
+    color: white;
+    padding: 1.2rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+
+    &:hover {
+        background-color: #057DB4;
+    }
+
+    .appointment__time {
+        font-size: 0.8rem;
+        font-weight: 100;
+        padding: 0 0 0.2rem;
+    }
+
+    .appointment__header {
+        font-weight: 300;
+        font-size: 1.4rem;
+        padding: 0.2rem 0;
+    }
+
+    .appointment__attendees {
+        font-weight: 100;
+        font-size: 0.8rem;
+        padding: 0.2rem 0;
+    }
+    
+    .appointment__btn {
+        background-color: transparent;
+        border: 2px solid $color-muddywhite;
+        border-radius: 3px;
+        font-size: 0.7rem;
+        font-weight: 100;
+        padding: 0.4rem 1.8rem;
+        transition: background-color 0.2s ease-in-out;
+        text-align: right;
+        float: right;
+
+        &:hover {
+            background-color: #fff;
+            border-color: #fff;
+            color: #057DB4;
+            transition: background-color 0.2s ease-in-out;
+            cursor: pointer;
+        }
+    }
+}
+
+.actions-container {
+    width: 50%;
+    display: flex;
+    overflow: auto;
+    
+    @media screen and (max-width: 70rem) {
+        width: 40%;
+    }
+} 
+
+.flex-items {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    align-self: center;
+    width: 50%;
+    max-height: 100%;
+}
+
+.action {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    flex: 0 50%;
+    margin: 0 0 3rem;
+    padding: 0 0.4rem;
+    &:hover  {
+        .icon-wrapper {
+            border-color: #057DB4;
+        }
+    }
+
+    .action__text {
+        font-size: 0.7rem;
+        font-weight: 300;
+        padding-top: 0.4rem;
+    }
+}
+
+.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid $color-muddywhite;
+    font-size: 2rem;
+    width: 5rem;
+    height: 5rem;
+
+    i {
+        font-size: 2rem;
+    }
+}
+
+.icon-wrapper i {
+    color: #FFF;
+}
+
+.time-container {
+    position: absolute;
+    color: #FFF;
+    top: 3rem;
+    right: 3rem;
+    font-size: 2rem;
+    font-weight: 100;
+
+    @media screen and (max-width: 70rem) {
+        top: 1rem;
+        right: 2rem;
+        font-size: 1.2rem;
+    }
+}
+
+.control-volume {
+    position: absolute;
+    color: #FFF;
+    bottom: 3rem;
+    right: 3rem;
+}
+
+.player {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.volume {
+    width: 4rem;
+    background-color: $color-muddywhite;
+    height: 0.1rem;
+    margin-left: 0.6rem;
+    position: relative;
+
+    .volume__inner {
+        position: absolute;
+        height: 100%;
+        width: 44%;
+        background-color: #057DB4;
+        left: 0;
+
+        &::after {
+            content: "";
+            background-color: #FFF;
+            display: block;
+            width: 0.7rem;
+            height: 0.7rem;
+            position: absolute;
+            right: 0;   
+            top:50%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+        }
+    }
+}

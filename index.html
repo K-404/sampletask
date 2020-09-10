@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.default.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
+
+    <style>
+        div {
+            max-width: 500px;
+        }
+
+        .header {
+            font-size: 24px;
+            cursor: pointer;
+            background-color: gainsboro;
+            text-align: left;
+        }
+        .descr {
+            display: none;
+            font-size: 18px;
+            cursor:auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="accordion" data-source="dataSource" data-template="template">
+        
+    </div>
+
+
+<!-- <script type="text/x-kendo-template" id="template">
+        <div>#= data.ProductName #</div>
+    </script> -->
+
+<script>
+    
+    (function($) {
+        // shorten references to variables
+        var kendo = window.kendo,
+            ui = kendo.ui,
+            Widget = ui.Widget,
+            CHANGE = "change";
+
+        var Accordion = Widget.extend({
+
+            init: function(element, options) {
+                that = this;
+
+                Widget.fn.init.call(this, element, options);
+
+                that.template = kendo.template(that.options.template || that._templates.content);
+
+                that._dataSource();
+
+                $(that.element).click(function(e) {
+                    if($(e.target).children('.descr').css('display') != 'block'){
+                        that._expand(e.target, that.options.animation.expand)
+                    } else {
+                        that._collapse(e.target, that.options.animation.collapse)
+                    }
+                });
+
+            },
+
+            options: {    
+                name: "Accordion",
+                autoBind: true,
+                template: '',
+                animation: {
+                    collapse: {
+                        duration: 100,
+                        effect: "linear"
+                    },
+                    expand: {
+                        duration: 100,
+                        effect: "linear"
+                    }
+                }
+            },
+
+            refresh: function() {
+                var view = that.dataSource.view(),
+                    html = kendo.render(that.template, view);
+
+                that.element.html(html);
+            },
+
+            _templates: {
+                content:"<div class=\"header\">#= data.header #" +
+                            "<div class=\"descr\"> #= data.description # </div>"+
+                        "</div>"
+            },
+
+            _collapse: function (el, collapse) {
+                $(el).children('.descr').removeClass('active').slideUp(collapse.duration, collapse.effect);
+            },
+
+            _expand: function (el, expand) {
+                $(el).children('.descr').addClass('active').slideDown(expand.duration, expand.effect);
+            },
+
+            _dataSource: function() {
+                // returns the datasource OR creates one if using an array or a configuration
+                that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
+
+                // Bind to the change event to refresh the widget
+                that.dataSource.bind(CHANGE, function() {
+                    that.refresh();
+                });
+
+                if (that.options.autoBind) {
+                    that.dataSource.fetch();
+                }
+          }
+        });
+
+        ui.plugin(Accordion);
+
+    })(jQuery);
+
+
+   // var dataSource = new kendo.data.DataSource({
+    //     type: "odata",
+    //     transport: {
+    //       read: "https"
+    //     }
+    // });
+
+    $("#accordion").kendoAccordion({
+        dataSource: [
+            {
+                header: 'Header1',
+                description: 'description1description1description1description1description1'
+            },
+            {
+                header: 'Header2',
+                description: 'description2description2description2description2description2'
+            },
+            {
+                header: 'Header3',
+                description: 'description3description3description3description3description3'
+            }
+        ],
+         animation: {
+            collapse: {
+                duration: 100,
+                effect: "linear"
+            },
+            expand: {
+                duration: 100,
+                effect: "linear"
+            }
+        }
+    });
+
+    kendo.bind($("#container"));
+</script>
+</body>
+</html>
